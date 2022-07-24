@@ -51,7 +51,7 @@ void PrintPage(CarInfoNode *head, int page) {
     }
     //œ‘ æ“≥¬Î
     printf("========================================================================================================================================================================================================\n\r");
-    printf("%d/%d\n\r", page + 1, GetMaxPage(GetInfoCount(head)) + 1);
+    printf("%d/%d\n\r", page + 1, GetMaxPage(GetNodeCount(head)) + 1);
 }
 
 void PrintCarInfo(CarInfoNode *node) {

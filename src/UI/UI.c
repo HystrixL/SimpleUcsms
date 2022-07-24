@@ -11,7 +11,7 @@ void WelcomeMenu(CarInfoNode *head) {
     Head = head;
     while (true) {
         //程序信息及菜单
-        ClearScreen();;
+        ClearScreen();
         printf(UI_BANNER);
         printf(UI_WELCOME_MENU);
         //用户输入
@@ -40,7 +40,7 @@ void WelcomeMenu(CarInfoNode *head) {
 void UserMenu() {
     int currentPage = 0;
     char input[10];
-    int maxPage = GetMaxPage(GetInfoCount(Head));
+    int maxPage = GetMaxPage(GetNodeCount(Head));
 
     while (true) {
         //打印当前页面
@@ -51,7 +51,7 @@ void UserMenu() {
         //等待用户输入
         printf(UI_INPUT_TIP);
         int i = 0;
-        while ((input[i] = getche()) != '\r') {
+        while ((input[i] = (char) getche()) != '\r') {
             i++;
             if (i == 1 && (input[0] == '+' || input[0] == '-')) break;
 
@@ -83,7 +83,7 @@ void UserMenu() {
             printf(UI_INPUT_ERROR);
         }
         //页面限幅
-        maxPage = GetMaxPage(GetInfoCount(Head));
+        maxPage = GetMaxPage(GetNodeCount(Head));
         LimitNumber(&currentPage, maxPage, 0);
     }
 }
@@ -91,7 +91,7 @@ void UserMenu() {
 void AdminMenu() {
     int currentPage = 0;
     char input[10];
-    int maxPage = GetMaxPage(GetInfoCount(Head));
+    int maxPage = GetMaxPage(GetNodeCount(Head));
 
     while (true) {
         //打印当前页面
@@ -102,7 +102,7 @@ void AdminMenu() {
         //等待用户输入
         printf(UI_INPUT_TIP);
         int i = 0;
-        while ((input[i] = getche()) != '\r') {
+        while ((input[i] = (char) getche()) != '\r') {
             i++;
             if (i == 1 && (input[0] == '+' || input[0] == '-')) break;
 
@@ -142,7 +142,7 @@ void AdminMenu() {
             printf(UI_INPUT_ERROR);
         }
         //页面限幅
-        maxPage = GetMaxPage(GetInfoCount(Head));
+        maxPage = GetMaxPage(GetNodeCount(Head));
         LimitNumber(&currentPage, maxPage, 0);
     }
 }
@@ -294,7 +294,7 @@ void SearchCarInfo() {
     }
 
     //查询结果列表逻辑
-    int infoNum = GetInfoCount(Head);
+    int infoNum = GetNodeCount(Head);
     if (infoNum != 0) {
         int currentPage = 0;
         int maxPage = GetMaxPage(infoNum);
@@ -361,8 +361,8 @@ void SearchCarInfo() {
                 getch();
             }
             //页码限幅
-            printf("%d", GetInfoCount(Head));
-            maxPage = GetMaxPage(GetInfoCount(Head));
+            printf("%d", GetNodeCount(Head));
+            maxPage = GetMaxPage(GetNodeCount(Head));
             LimitNumber(&currentPage, maxPage, 0);
         }
     } else {                                                //查询结果列表为空

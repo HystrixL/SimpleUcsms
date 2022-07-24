@@ -3,27 +3,19 @@ project(CFinalWork C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(
-        CFinalWork
-        main.c
-        Core/common.c
-        Core/common.h
-        Core/definition.h
-        Core/includes.h
-        IO/File.c
-        IO/File.h
-        IO/Console.c
-        IO/Console.h
-        Data/CarInfo.h
-        Data/Data.c
-        Data/Data.h
-        UI/UIString.h
-        UI/BaseUI.c
-        UI/BaseUI.h
-        UI/UI.c
-        UI/UI.h
-        User/Login.c
-        User/Login.h
-        User/Permission.c
-        User/Permission.h
+aux_source_directory(./src SRC_FILES)
+aux_source_directory(./src/Core CORE_SRC_FILES)
+aux_source_directory(./src/Data DATA_SRC_FILES)
+aux_source_directory(./src/IO IO_SRC_FILES)
+aux_source_directory(./src/UI UI_SRC_FILES)
+aux_source_directory(./src/User USER_SRC_FILES)
+
+add_executable(${PROJECT_NAME} ${SRC_FILES} ${CORE_SRC_FILES} ${DATA_SRC_FILES} ${IO_SRC_FILES} ${UI_SRC_FILES} ${USER_SRC_FILES})
+
+add_custom_command(
+        TARGET ${CMAKE_PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/Example"
+        "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/data"
 )

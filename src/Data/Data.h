@@ -87,7 +87,7 @@ void DeleteAllNode(CarInfoNode *head);
  * @param head 链表头节点地址
   * @return 链表节点数量
 */
-int GetInfoCount(CarInfoNode *head);
+int GetNodeCount(CarInfoNode *head);
 
 /*!
  * @brief 获取最大页数

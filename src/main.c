@@ -1,6 +1,9 @@
 #include "Core/includes.h"
 #include "UI/UI.h"
 
+CarInfo test[5];
+
+
 int main() {
     //初始化系统
     CarInfoNode *head = Init();

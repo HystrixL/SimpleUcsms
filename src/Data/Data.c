@@ -104,19 +104,17 @@ void ResetAllNode(CarInfoNode *head) {
 void DeleteAllNode(CarInfoNode *head) {
     if (head == NULL) return;
 
-    CarInfoNode *ptr, *pn;
-    ptr = head;
-    pn = ptr->next;
-    while (pn != NULL) {
-        free(ptr);
-        ptr = pn;
-        pn = ptr->next;
+    CarInfoNode *ptr = head;
+
+    while (ptr->next != NULL) {
+        ptr = ptr->next;
+        free(ptr->prior);
     }
 
     free(ptr);
 }
 
-int GetInfoCount(CarInfoNode *head) {
+int GetNodeCount(CarInfoNode *head) {
     int num = 0;
     for (CarInfoNode *node = head; node != NULL; node = node->next) {
         if (node->isVisible) ++num;
