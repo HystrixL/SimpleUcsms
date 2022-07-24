@@ -12,7 +12,14 @@ CarInfoNode *Init() {
     //读取密码
     ReadPassword();
     //读入数据
-    return ReadCarFromFile(DATA_PATH);
+    CarInfoNode *head = ReadCarFromFile(DATA_PATH);
+    if (head == NULL) {
+        char str[100];
+        sprintf(str, "%s%s%s", "初始数据读入失败！请检查 ", DATA_PATH, " 后再试");
+        Pause(str);
+        exit(0);
+    }
+    return head;
 }
 
 void LimitNumber(int *source, int max, int min) {

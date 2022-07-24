@@ -21,13 +21,21 @@ void UserInput(char *input) {
 void EncryptInput(char *input) {
     printf(UI_INPUT_TIP);
     int i = 0;
-    //将输入内容显示转为'*'
-    while ((input[i] = getch()) != '\r') {
-        putch('*');
-        i++;
+
+    while (1) {
+        char c = getch();
+        if (c == '\r') break;
+        if (c == '\b') {
+            if (i > 0) {
+                input[--i] = '\0';
+                printf("\b \b");
+            }
+            continue;
+        }
+        input[i++] = c;
+        printf("*");
     }
     input[i] = '\0';
-
 }
 
 void PrintPage(CarInfoNode *head, int page) {
