@@ -24,15 +24,15 @@ void AppendNode(CarInfoNode *head, CarInfo carInfo) {
     ptr->prior = pp;
 }
 
-void LinkList(CarInfoNode *fstHead, CarInfoNode *sedHead) {
-    if (fstHead == NULL || sedHead == NULL) return;
+void LinkList(CarInfoNode *head1, CarInfoNode *head2) {
+    if (head1 == NULL || head2 == NULL) return;
 
-    CarInfoNode *ptr = fstHead;
+    CarInfoNode *ptr = head1;
     while (ptr->next != NULL) {
         ptr = ptr->next;
     }
-    ptr->next = sedHead;
-    sedHead->prior = ptr;
+    ptr->next = head2;
+    head2->prior = ptr;
 }
 
 CarInfoNode *DeleteNode(CarInfoNode *head, CarInfoNode *node) {
@@ -58,7 +58,7 @@ CarInfoNode *DeleteNode(CarInfoNode *head, CarInfoNode *node) {
         pp = pp->next;
     }
 
-    if (pp->next == NULL) return NULL;
+    if (pp->next == NULL) return head;
 
     ptr = pp->next;
     pn = ptr->next;
@@ -83,19 +83,19 @@ CarInfoNode *SelectNode(CarInfoNode *head, int id) {
     }
 
     if (ptr->data.Id == id) return ptr;
-    if (ptr->next == NULL) return NULL;
+    return NULL;
 }
 
-void SwitchNode(CarInfoNode *fst, CarInfoNode *sed) {
-    if (fst == NULL || sed == NULL) return;
+void SwitchNode(CarInfoNode *node1, CarInfoNode *node2) {
+    if (node1 == NULL || node2 == NULL) return;
 
-    CarInfo ciTemp = fst->data;
-    fst->data = sed->data;
-    sed->data = ciTemp;
+    CarInfo dataTemp = node1->data;
+    node1->data = node2->data;
+    node2->data = dataTemp;
 
-    bool ivTemp = fst->isVisible;
-    fst->isVisible = sed->isVisible;
-    sed->isVisible = ivTemp;
+    bool statusTemp = node1->isVisible;
+    node1->isVisible = node2->isVisible;
+    node2->isVisible = statusTemp;
 }
 
 void ResetAllNode(CarInfoNode *head) {

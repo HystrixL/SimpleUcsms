@@ -20,8 +20,8 @@ typedef struct Date Date;
 //数据文件路径
 #define DATA_PATH ".\\data\\data.txt"
 //密码文件路径
-#define PWD_PATH ".\\data\\pwd.txt"
+#define PASSWORD_PATH ".\\data\\pwd.txt"
 //最大密码长度
-#define MAX_PWD_LENGTH 20
+#define MAX_PASSWORD_LENGTH 20
 
 #endif //CFINALWORK_DEFINITION_H

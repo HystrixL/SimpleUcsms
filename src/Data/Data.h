@@ -41,10 +41,10 @@ CarInfoNode *DeleteNode(CarInfoNode *head, CarInfoNode *node);
  * @brief 链接链表
  * @details 输入两个链表头地址，并将这两个链表依次连接起来
  *
- * @param fstHead 首个链表头地址
- * @param sedHead 第二个链表头地址
+ * @param head1 首个链表头地址
+ * @param head2 第二个链表头地址
 */
-void LinkList(CarInfoNode *fstHead, CarInfoNode *sedHead);
+void LinkList(CarInfoNode *head1, CarInfoNode *head2);
 
 /*!
  * @brief 加入新结点
@@ -59,10 +59,10 @@ void AppendNode(CarInfoNode *head, CarInfo carInfo);
  * @brief 交换节点
  * @details 将输入的两个链表节点地址的数据交换
  *
- * @param fst 首个链表节点
- * @param sed 第二个链表节点
+ * @param node1 首个链表节点
+ * @param node2 第二个链表节点
 */
-void SwitchNode(CarInfoNode *fst, CarInfoNode *sed);
+void SwitchNode(CarInfoNode *node1, CarInfoNode *node2);
 
 /*!
  * @brief 重置链表状态

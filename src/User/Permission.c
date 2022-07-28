@@ -5,7 +5,7 @@
 #include "Permission.h"
 
 static bool isAdmin = false;
-static char password[MAX_PWD_LENGTH];
+static char password[MAX_PASSWORD_LENGTH];
 
 void SetIsAdmin(bool input) {
     isAdmin = input;
@@ -20,19 +20,17 @@ char *GetPassword() {
 }
 
 void ReadPassword() {
-    ReadStrFromFile(PWD_PATH, password);
+    ReadStrFromFile(PASSWORD_PATH, password);
 }
 
 int WritePassword() {
-    if (SaveStrFromFile(PWD_PATH, password)) {
-        return 1;
-    } else {
-        return 0;
-    }
+    return SaveStrFromFile(PASSWORD_PATH, password);
 }
 
 int ChangePassword() {
-    printf("请输入新密码(<=19字符)：");
+    char outputTemp[40];
+    sprintf(outputTemp, "请输入长度 %d 以内的新密码：", MAX_PASSWORD_LENGTH);
+    printf("%s", outputTemp);
     scanf("%s", password);
     return WritePassword();
 }
