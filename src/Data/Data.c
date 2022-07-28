@@ -40,7 +40,8 @@ CarInfoNode *DeleteNode(CarInfoNode *head, CarInfoNode *node) {
 
     //头节点
     if (node == head) {
-        CarInfoNode *ptr, *pn;
+        CarInfoNode *ptr;
+        CarInfoNode *pn;
         ptr = head;
         pn = ptr->next;
         pn->prior = NULL;
@@ -48,7 +49,9 @@ CarInfoNode *DeleteNode(CarInfoNode *head, CarInfoNode *node) {
         return pn;
     }
 
-    CarInfoNode *pp, *ptr, *pn;
+    CarInfoNode *pp;
+    CarInfoNode *ptr;
+    CarInfoNode *pn;
     pp = head;
 
     while (pp->next != node && pp->next != NULL) {

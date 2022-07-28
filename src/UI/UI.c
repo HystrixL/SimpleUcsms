@@ -97,7 +97,7 @@ void AdminMenu() {
         //打印当前页面
         PrintPage(Head, currentPage);
         printf("\n\r");
-        printf(UI_ADMIN_MENU);
+        printf("%s", UI_ADMIN_MENU);
 
         //等待用户输入
         printf(UI_INPUT_TIP);
@@ -451,7 +451,7 @@ void SortCarInfo() {
 void StatisticsCarInfo() {
     //显示统计选项菜单
     ClearScreen();
-    printf(UI_Statistics_OPTIONS);
+    printf(UI_STATISTICS_OPTIONS);
 
     while (true) {
         //等待用户输入
@@ -505,7 +505,7 @@ void AddCarInfo() {
         UserInput(input);
         if (!strcmp(input, "1")) {//添加单条信息
             printf("请根据以下提示输入二手车信息：");
-            printf(UI_INFO_TIP);//内容提示
+            printf(UI_INFO_INPUT_TIP);//内容提示
             printf("\n\r");
 
             CarInfo carInfo;
@@ -582,7 +582,7 @@ void SelectCar(int id) {
     while (true) {
         //显示详细信息菜单
         ClearScreen();
-        printf(UI_INFO_BAR);
+        printf(UI_INFO_HEADER);
         printf("\n\r");
         PrintCarInfo(node);
         printf("\n\r");

@@ -5,7 +5,7 @@
 #include "File.h"
 #include "../Data/CarInfo.h"
 
-CarInfoNode *ReadCarFromFile(char *path) {
+CarInfoNode *ReadCarFromFile(const char *path) {
     //打开文件，准备读取
     FILE *file;
     file = fopen(path, "r");
@@ -55,7 +55,7 @@ CarInfoNode *ReadCarFromFile(char *path) {
     return head;
 }
 
-int SaveCarToFile(char *path, CarInfoNode *head) {
+int SaveCarToFile(const char *path, const CarInfoNode *head) {
     if (head == NULL) return 0;
     //打开文件，准备写入
     FILE *file;
@@ -65,7 +65,7 @@ int SaveCarToFile(char *path, CarInfoNode *head) {
         return 1;
     };
 
-    for (CarInfoNode *node = head; node != NULL; node = node->next) {
+    for (const CarInfoNode *node = head; node != NULL; node = node->next) {
         //非首条信息时进行换行，可确保文件头尾无多余换行符
         if (node != head)fprintf(file, "\n");
         //写入数据
@@ -85,7 +85,7 @@ int SaveCarToFile(char *path, CarInfoNode *head) {
     return 0;
 }
 
-int GetFileLines(char *path) {
+int GetFileLines(const char *path) {
     FILE *file;
     file = fopen(path, "r");
 
@@ -101,7 +101,7 @@ int GetFileLines(char *path) {
     return i;
 }
 
-void ReadStrFromFile(char *path, char *content) {
+void ReadStrFromFile(const char *path, const char *content) {
     //打开文件，准备读取
     FILE *file;
     file = fopen(path, "r");
@@ -115,7 +115,7 @@ void ReadStrFromFile(char *path, char *content) {
     fclose(file);
 }
 
-int SaveStrFromFile(char *path, char *content) {
+int SaveStrFromFile(const char *path, const char *content) {
     //打开文件，准备写入
     FILE *file;
     file = fopen(path, "w");

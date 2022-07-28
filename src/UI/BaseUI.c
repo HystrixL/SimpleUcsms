@@ -23,7 +23,7 @@ void EncryptInput(char *input) {
     int i = 0;
 
     while (1) {
-        char c = getch();
+        char c = (char) getch();
         if (c == '\r') break;
         if (c == '\b') {
             if (i > 0) {
@@ -48,7 +48,7 @@ void PrintPage(CarInfoNode *head, int page) {
     }
     //显示表头
     ClearScreen();
-    printf(UI_INFO_BAR);
+    printf(UI_INFO_HEADER);
     printf("\n\r");
     //显示二手车数据信息
     for (int i = 0; i < 10 && node != NULL; node = node->next) {

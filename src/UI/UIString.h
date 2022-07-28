@@ -6,146 +6,57 @@
 #define CFINALWORK_UISTRING_H
 
 //程序信息
-#define UI_BANNER \
-"\
-=========================================\n\r\
-              二手车销售管理系统\n\r\
-           作者：黄恩浩 1211001011\n\r\
-=========================================\n\r\
-"
+const extern char *UI_BANNER;
 
 //主菜单
-#define UI_WELCOME_MENU \
-"\
-[1] 用户模式\n\r\
-[2] 管理员模式\n\r\
-\n\r\
-[0] 退出\
-"
+const extern char *UI_WELCOME_MENU;
 
 //用户模式菜单
-#define UI_USER_MENU \
-"\
-[1]查询 [2]排序 [3]统计 [~N]跳转到第N页 [0]返回\
-"
+const extern char *UI_USER_MENU;
 
 //管理员模式菜单
-#define UI_ADMIN_MENU \
-"\
-[1]查询 [2]排序 [3]统计 [4]新增 [5]保存 [6]设置 [~N]跳转到第N页 [0]返回\
-"
+const extern char *UI_ADMIN_MENU;
 
 //选择菜单
-#define UI_SELECT_MENU \
-"\
-[1]修改 [2]删除 [0]返回\
-"
+const extern char *UI_SELECT_MENU;
 
 //更多设置菜单
-#define UI_MORE_SET_MENU \
-"\
-[1] 修改密码\n\r\
-\n\r\
-[0] 返回\
-"
+const extern char *UI_MORE_SET_MENU;
 
 //输入提示符
-#define UI_INPUT_TIP \
-"\
-\n\r\
-> \
-"
+const extern char *UI_INPUT_TIP;
 
 //查询菜单
-#define UI_SEARCH_OPTIONS \
-"\
-请选择查询条件：\n\r\
-[1]品牌 [2]型号 [3]原价范围 [4]进价范围 [5]实售价范围\n\r\
-[6]车龄范围 [7]是否大修 [8]是否故障 [9]车辆状态 [10]销售员ID\n\r\
-\n\r\
-[0]取消\n\r\
-TIPS:可同时选择多个条件\
-\
-"
+const extern char *UI_SEARCH_OPTIONS;
 
 //统计菜单
-#define UI_Statistics_OPTIONS \
-"\
-请选择统计数据条件：\n\r\
-[1] 二手车销售总利润\n\r\
-[2] 卖家预估售价与实际售价平均差值\n\r\
-[3] 车辆价值随车龄平均降低值\n\r\
-\n\r\
-[0]取消\
-\
-"
+const extern char *UI_STATISTICS_OPTIONS;
 
 //返回
-#define UI_BACK_MENU \
-"\
-[0]返回\
-"
+const extern char *UI_BACK_MENU;
 
 //管理员查询菜单
-#define UI_ADMIN_SEARCH_MENU \
-"\
-[1]删除全部！ [0]返回\
-"
+const extern char *UI_ADMIN_SEARCH_MENU;
 
 //排序菜单
-#define UI_SORT_OPTIONS \
-"\
-请选择排序依据：\n\r\
-[1]编号 [2]品牌 [3]里程 [4]原价 [5]进价 \n\r\
-[6]实售价 [7]车龄 [8]日期 [9]销售员ID\n\r\
-\n\r\
-[0]取消\n\r\
-TIPS:可通过在序号前使用'!'来降序排序\
-\
-"
+const extern char *UI_SORT_OPTIONS;
 
 //修改菜单
-#define UI_CHANGE_OPTION \
-"\
-请选择修改项目：\n\r\
-[1]品牌 [2]型号 [3]原价\n\r\
-[4]进价 [5]实售价 [6]车辆状态\n\r\
-\n\r\
-[0]取消\n\r\
-"
+const extern char *UI_CHANGE_OPTION;
 
 //表头
-#define UI_INFO_BAR \
-"\
-编号   品牌         型号         原价(万元) 进价(万元) 实售价(万元) 里程(KM) 车龄(年) 是否有大修 是否有故障 车辆状态     日期      卖家姓名 预期售价(万元) 销售员姓名 销售员ID 客户姓名    客户号码    经手人姓名\n\r\
-========================================================================================================================================================================================================\
-"
+const extern char *UI_INFO_HEADER;
 
 //输入提示
-#define UI_INFO_TIP \
-"\
-编号 品牌 型号 原价(万元) 进价(万元) 实售价(万元) 里程(KM) 车龄(年) 是否有大修[Y/N] 是否有故障[Y/N] 车辆状态[入库/出库/预定] 日期[Y/M/D] 卖家姓名 预期售价(万元) 销售员姓名 销售员ID 客户姓名 客户号码 经手人姓名\
-"
+const extern char *UI_INFO_INPUT_TIP;
 
 //错误输入提示
-#define UI_INPUT_ERROR \
-"\
-无效输入！请检查后重新输入。\
-"
+const extern char *UI_INPUT_ERROR;
 
 //增加菜单
-#define UI_ADD_CAR_OPTION \
-"\
-请选择添加方式：\n\r\
-[1] 添加单条\n\r\
-[2] 添加文件\n\r\
-\n\r\
-[0]取消\
-\
-"
+const extern char *UI_ADD_CAR_OPTION;
 
-#define DELETE_VERIFY \
-"\
-请再次核对，确定删除选中信息？请输入y确定\
-"
+//删除确认
+const extern char *DELETE_VERIFY;
+
 #endif //CFINALWORK_UISTRING_H

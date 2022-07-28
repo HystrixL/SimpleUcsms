@@ -15,7 +15,7 @@
  * @param path 文件路径
  * @return 链表头节点地址
 */
-CarInfoNode *ReadCarFromFile(char *path);
+CarInfoNode *ReadCarFromFile(const char *path);
 
 /*!
  * @brief 获取文件行数
@@ -24,7 +24,7 @@ CarInfoNode *ReadCarFromFile(char *path);
  * @param path 文件路径
  * @return 文件行数
 */
-int GetFileLines(char *path);
+int GetFileLines(const char *path);
 
 /*!
  * @brief 从文件中读入字符串
@@ -33,7 +33,7 @@ int GetFileLines(char *path);
  * @param path 文件路径
  * @param content 目标字符串地址
 */
-void ReadStrFromFile(char *path, char *content);
+void ReadStrFromFile(const char *path, const char *content);
 
 /*!
  * @brief 将二手车信息写入文件
@@ -43,7 +43,7 @@ void ReadStrFromFile(char *path, char *content);
  * @param head 二手车信息链表头节点地址
  * @return 保存结果（非0为失败）
 */
-int SaveCarToFile(char *path, CarInfoNode *head);
+int SaveCarToFile(const char *path, const CarInfoNode *head);
 
 /*!
  * @brief 将二字符串写入文件
@@ -53,6 +53,6 @@ int SaveCarToFile(char *path, CarInfoNode *head);
  * @param head 字符串地址
  * @return 保存结果（非0为失败）
 */
-int SaveStrFromFile(char *path, char *content);
+int SaveStrFromFile(const char *path, const char *content);
 
 #endif //CFINALWORK_FILE_H

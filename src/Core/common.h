@@ -36,4 +36,6 @@ void LimitNumber(int *source, int max, int min);
 */
 bool DateCompare(Date date1, Date date2);
 
+#define GET_LENGTH(ARR) ((sizeof(ARR))/(sizeof((*ARR))))
+
 #endif //CFINALWORK_COMMON_H
