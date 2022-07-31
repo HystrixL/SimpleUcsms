@@ -8,18 +8,25 @@
 void Pause(char *tip) {
     ClearScreen();
     printf("%s\n\r", tip);
-    printf("===========================================\n\r");
+    PrintDividerBar(43);
     printf("按下任意键继续……");
     getch();
 }
 
+void PrintDividerBar(int length) {
+    for (int i = 0; i < length; ++i) {
+        printf("%s", DIVIDER_BAR_CHAR);
+    }
+    printf("\n\r");
+}
+
 void UserInput(char *input) {
-    printf(UI_INPUT_TIP);
+    printf("%s", UI_INPUT_TIP);
     scanf("%s", input);
 }
 
 void EncryptInput(char *input) {
-    printf(UI_INPUT_TIP);
+    printf("%s", UI_INPUT_TIP);
     int i = 0;
 
     while (1) {
@@ -48,7 +55,7 @@ void PrintPage(CarInfoNode *head, int page) {
     }
     //显示表头
     ClearScreen();
-    printf(UI_INFO_HEADER);
+    printf("%s", UI_INFO_HEADER);
     printf("\n\r");
     //显示二手车数据信息
     for (int i = 0; i < 10 && node != NULL; node = node->next) {
@@ -58,7 +65,7 @@ void PrintPage(CarInfoNode *head, int page) {
         }
     }
     //显示页码
-    printf("========================================================================================================================================================================================================\n\r");
+    PrintDividerBar(200);
     printf("%d/%d\n\r", page + 1, GetMaxPage(GetNodeCount(head)) + 1);
 }
 

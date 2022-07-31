@@ -51,4 +51,6 @@ void PrintPage(CarInfoNode *head, int page);
 */
 void PrintCarInfo(CarInfoNode *node);
 
+void PrintDividerBar(int length);
+
 #endif //CFINALWORK_BASEUI_H
