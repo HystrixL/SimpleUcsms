@@ -59,4 +59,7 @@ const extern char *UI_ADD_CAR_OPTION;
 //É¾³ýÈ·ÈÏ
 const extern char *DELETE_VERIFY;
 
+//·Ö¸ôÀ¸×Ö·û
+const extern char *DIVIDER_BAR_CHAR;
+
 #endif //CFINALWORK_UISTRING_H

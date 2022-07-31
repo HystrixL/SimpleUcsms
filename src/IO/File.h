@@ -24,7 +24,7 @@ CarInfoNode *ReadCarFromFile(const char *path);
  * @param path 文件路径
  * @return 文件行数
 */
-int GetFileLines(const char *path);
+__attribute__((unused)) int GetFileLines(const char *path);
 
 /*!
  * @brief 从文件中读入字符串

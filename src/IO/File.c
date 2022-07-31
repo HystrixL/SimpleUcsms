@@ -3,7 +3,6 @@
 //
 
 #include "File.h"
-#include "../Data/CarInfo.h"
 
 CarInfoNode *ReadCarFromFile(const char *path) {
     //打开文件，准备读取
@@ -35,7 +34,7 @@ CarInfoNode *ReadCarFromFile(const char *path) {
         int t = fscanf(file, DATA_INPUT_FORMAT,
                        &ptr->data.Id, ptr->data.Brand, ptr->data.Model,
                        &ptr->data.OriPrice, &ptr->data.PurchasePrice, &ptr->data.ActualPrice,
-                       &ptr->data.Mileage, &ptr->data.Age, &ptr->data.HaveRepair, &ptr->data.IsFault, &ptr->data.Status,
+                       &ptr->data.Mileage, &ptr->data.Age, &ptr->data.HaveRepair, &ptr->data.IsFault, ptr->data.Status,
                        &ptr->data.Date.Year, &ptr->data.Date.Mouth, &ptr->data.Date.Day,
                        ptr->data.Seller.Name, &ptr->data.Seller.EstimatedPrice,
                        ptr->data.SalesPerson.Name, &ptr->data.SalesPerson.Id,
@@ -85,7 +84,7 @@ int SaveCarToFile(const char *path, const CarInfoNode *head) {
     return 0;
 }
 
-int GetFileLines(const char *path) {
+__attribute__((unused)) int GetFileLines(const char *path) {
     FILE *file;
     file = fopen(path, "r");
 

@@ -15,7 +15,7 @@ CarInfoNode *Init() {
     CarInfoNode *head = ReadCarFromFile(DATA_PATH);
     if (head == NULL) {
         char str[100];
-        sprintf(str, "%s%s%s", "初始数据读入失败！请检查 ", DATA_PATH, " 后再试");
+        sprintf(str, "初始数据读入失败！请检查 %s 后再试", DATA_PATH);
         Pause(str);
         exit(0);
     }
