@@ -12,8 +12,8 @@ void WelcomeMenu(CarInfoNode *head) {
     while (true) {
         //程序信息及菜单
         ClearScreen();
-        printf(UI_BANNER);
-        printf(UI_WELCOME_MENU);
+        printf("%s", UI_BANNER);
+        printf("%s", UI_WELCOME_MENU);
         //用户输入
         char input[10];
         UserInput(input);
@@ -22,13 +22,13 @@ void WelcomeMenu(CarInfoNode *head) {
             break;
         else if (!strcmp(input, "1")) {         //用户模式
             SetIsAdmin(false);
-            UserMenu(head);
+            UserMenu();
         } else if (!strcmp(input, "2")) {       //管理员模式
             if (!AdminLogin()) continue;        //登陆验证
             SetIsAdmin(true);
-            AdminMenu(head);
+            AdminMenu();
         } else {                                //输入错误
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
             getch();
         }
     }
@@ -37,19 +37,19 @@ void WelcomeMenu(CarInfoNode *head) {
     DeleteAllNode(head);
 }
 
-void UserMenu() {
+void UserMenu(void) {
     int currentPage = 0;
     char input[10];
-    int maxPage = GetMaxPage(GetNodeCount(Head));
+    int maxPage;
 
     while (true) {
         //打印当前页面
         PrintPage(Head, currentPage);
         printf("\n\r");
-        printf(UI_USER_MENU);
+        printf("%s", UI_USER_MENU);
 
         //等待用户输入
-        printf(UI_INPUT_TIP);
+        printf("%s", UI_INPUT_TIP);
         int i = 0;
         while ((input[i] = (char) getche()) != '\r') {
             i++;
@@ -66,11 +66,11 @@ void UserMenu() {
         } else if (!strcmp(input, "0")) {           //返回
             break;
         } else if (!strcmp(input, "1")) {           //查询
-            SearchCarInfo(&Head);
+            SearchCarInfo();
         } else if (!strcmp(input, "2")) {           //排序
-            SortCarInfo(Head);
+            SortCarInfo();
         } else if (!strcmp(input, "3")) {           //统计
-            StatisticsCarInfo(Head);
+            StatisticsCarInfo();
         } else if (input[0] == '~') {               //跳转
             char pageTo[10];
             strcpy(pageTo, &input[1]);
@@ -78,9 +78,9 @@ void UserMenu() {
 //                Pause("当前页码不存在！");
 //                continue;
 //            }
-            currentPage = atoi(pageTo) - 1;
+            currentPage = strtol(pageTo, NULL, 10) - 1;
         } else {                                       //无效输入
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
         }
         //页面限幅
         maxPage = GetMaxPage(GetNodeCount(Head));
@@ -88,10 +88,10 @@ void UserMenu() {
     }
 }
 
-void AdminMenu() {
+void AdminMenu(void) {
     int currentPage = 0;
     char input[10];
-    int maxPage = GetMaxPage(GetNodeCount(Head));
+    int maxPage;
 
     while (true) {
         //打印当前页面
@@ -100,7 +100,7 @@ void AdminMenu() {
         printf("%s", UI_ADMIN_MENU);
 
         //等待用户输入
-        printf(UI_INPUT_TIP);
+        printf("%s", UI_INPUT_TIP);
         int i = 0;
         while ((input[i] = (char) getche()) != '\r') {
             i++;
@@ -128,7 +128,7 @@ void AdminMenu() {
         } else if (!strcmp(input, "6")) {           //设置
             Settings();
         } else if (strlen(input) == 4) {        //选择
-            int id = atoi(input);
+            int id = strtol(input, NULL, 10);
             SelectCar(id);
         } else if (input[0] == '~') {               //跳转
             char pageTo[10];
@@ -137,9 +137,9 @@ void AdminMenu() {
 //                Pause("当前页码不存在！");
 //                continue;
 //            }
-            currentPage = atoi(pageTo) - 1;
+            currentPage = strtol(pageTo, NULL, 10) - 1;
         } else {                                    //无效输入
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
         }
         //页面限幅
         maxPage = GetMaxPage(GetNodeCount(Head));
@@ -147,40 +147,39 @@ void AdminMenu() {
     }
 }
 
-void SearchCarInfo() {
+void SearchCarInfo(void) {
     //显示菜单
     ClearScreen();
-    printf(UI_SEARCH_OPTIONS);
+    printf("%s", UI_SEARCH_OPTIONS);
 
     int options[10] = {0};//用户输入列表
+    char convTemp[20] = {0};
     bool isInvalid = true;
     int count;
     while (isInvalid) {
         //用户输入
-        printf(UI_INPUT_TIP);
+        printf("%s", UI_INPUT_TIP);
         count = 0;
         //获取多个输入
-        char c;
         do {
-            scanf("%d", &options[count++]);
-        } while ((c = getchar()) != '\n');
+            scanf("%s", convTemp);
+            options[count] = strtol(convTemp, NULL, 10);
+            count++;
+        } while ((getchar()) != '\n');
         isInvalid = false;
 
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i < count; ++i) {
             //存在 0 -> 返回
             if (options[i] == 0)
                 return;
                 //存在无效输入 -> 再次输入
             else if (options[i] < 0 || options[i] > 10) {
-                printf(UI_INPUT_ERROR);
+                printf("%s", UI_INPUT_ERROR);
                 isInvalid = true;
                 getche();
             }
+        }
     }
-
-//    for (int i = 0; i < count; ++i)
-//        if (options[i] == 0)
-//            return;
 
     for (int i = 0; i < count; ++i) {
         switch (options[i]) {
@@ -192,7 +191,7 @@ void SearchCarInfo() {
                 scanf("%s", brand);
                 //将不符合条件的数据可见性置为false
                 for (CarInfoNode *node = Head; node != NULL; node = node->next) {
-                    if (strcmp(brand, node->data.Brand)) node->isVisible = false;
+                    if (strcmp(brand, node->data.Brand) != 0) node->isVisible = false;
                 }
                 break;
             }
@@ -202,7 +201,7 @@ void SearchCarInfo() {
                 printf("请输入欲查询的型号 >");
                 scanf("%s", model);
                 for (CarInfoNode *node = Head; node != NULL; node = node->next) {
-                    if (strcmp(model, node->data.Model)) node->isVisible = false;
+                    if (strcmp(model, node->data.Model) != 0) node->isVisible = false;
                 }
                 break;
             }
@@ -238,9 +237,9 @@ void SearchCarInfo() {
             }
                 //按车龄查询
             case 6: {
-                float max, min;
+                int max, min;
                 printf("请依次输入车龄范围的上限及下限 >");
-                scanf("%f %f", &max, &min);
+                scanf("%d %d", &max, &min);
                 for (CarInfoNode *node = Head; node != NULL; node = node->next) {
                     if (node->data.Age < min || node->data.Age > max) node->isVisible = false;
                 }
@@ -249,6 +248,7 @@ void SearchCarInfo() {
                 //按是否大修查询
             case 7: {
                 char haveRepair;
+                if (i != 0) getchar();
                 printf("请选择是否大修[Y/N] >");
                 scanf("%c", &haveRepair);
                 if (haveRepair == 'y') haveRepair = 'Y';
@@ -261,6 +261,7 @@ void SearchCarInfo() {
                 //按是否故障查询
             case 8: {
                 char isFault;
+                if (i != 0) getchar();
                 printf("请选择是否故障[Y/N] >");
                 scanf("%c", &isFault);
                 if (isFault == 'y') isFault = 'Y';
@@ -276,7 +277,7 @@ void SearchCarInfo() {
                 printf("请选择车辆状态[入库/出库/预定] >");
                 scanf("%s", status);
                 for (CarInfoNode *node = Head; node != NULL; node = node->next) {
-                    if (strcmp(status, node->data.Status)) node->isVisible = false;
+                    if (strcmp(status, node->data.Status) != 0) node->isVisible = false;
                 }
                 break;
             }
@@ -297,19 +298,19 @@ void SearchCarInfo() {
     int infoNum = GetNodeCount(Head);
     if (infoNum != 0) {
         int currentPage = 0;
-        int maxPage = GetMaxPage(infoNum);
+        int maxPage;
         char input[10];
         while (true) {
             //打印当前页面数据
             PrintPage(Head, currentPage);
             printf("\n\r");
 
-            if (GetIsAdmin())printf(UI_ADMIN_SEARCH_MENU);
-            else printf(UI_BACK_MENU);
+            if (GetIsAdmin())printf("%s", UI_ADMIN_SEARCH_MENU);
+            else printf("%s", UI_BACK_MENU);
             //等到用户输入
-            printf(UI_INPUT_TIP);
+            printf("%s", UI_INPUT_TIP);
             int i = 0;
-            while ((input[i] = getche()) != '\r') {
+            while ((input[i] = (char) getche()) != '\r') {
                 i++;
                 if (i == 1 && (input[0] == '+' || input[0] == '-')) break;
 
@@ -324,12 +325,12 @@ void SearchCarInfo() {
                 break;
             } else if (!strcmp(input, "1")) {               //管理员模式下删除全部
                 if (!GetIsAdmin()) {                          //非管理员错误
-                    printf(UI_INPUT_ERROR);
+                    printf("%s", UI_INPUT_ERROR);
                     getch();
                     continue;
                 }
                 //二次核对
-                printf(DELETE_VERIFY);
+                printf("%s", DELETE_VERIFY);
                 UserInput(input);
                 if (!strcmp(input, "y")) {
                     //遍历删除"当前可见的数据"->"查询结果"
@@ -350,14 +351,14 @@ void SearchCarInfo() {
                 currentPage = atoi(pageTo) - 1;
             } else if (strlen(input) == 4) {             //选择指定编号二手车
                 if (!GetIsAdmin()) {                           //非管理员错误
-                    printf(UI_INPUT_ERROR);
+                    printf("%s", UI_INPUT_ERROR);
                     getch();
                     continue;
                 }
                 int id = atoi(input);
                 SelectCar(id);
             } else {                                           //无效输入
-                printf(UI_INPUT_ERROR);
+                printf("%s", UI_INPUT_ERROR);
                 getch();
             }
             //页码限幅
@@ -371,10 +372,10 @@ void SearchCarInfo() {
     ResetAllNode(Head);                                 //返回前重置所有可见性
 }
 
-void SortCarInfo() {
+void SortCarInfo(void) {
     //显示排序菜单
     ClearScreen();
-    printf(UI_SORT_OPTIONS);
+    printf("%s", UI_SORT_OPTIONS);
 
     char input;
     bool isDescend = false;
@@ -392,7 +393,7 @@ void SortCarInfo() {
         }
 
         if (input < '0' || input > '9') {       //无效输入
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
         } else if (input == '0')                //返回
             return;
         else                                    //完成输入
@@ -434,6 +435,8 @@ void SortCarInfo() {
                 case '9'://按销售员ID排序
                     isMin = j->data.SalesPerson.Id < min->data.SalesPerson.Id;
                     break;
+                default:
+                    break;
             }
             if (isDescend) isMin = !isMin;//降序反转
 
@@ -448,10 +451,10 @@ void SortCarInfo() {
     }
 }
 
-void StatisticsCarInfo() {
+void StatisticsCarInfo(void) {
     //显示统计选项菜单
     ClearScreen();
-    printf(UI_STATISTICS_OPTIONS);
+    printf("%s", UI_STATISTICS_OPTIONS);
 
     while (true) {
         //等待用户输入
@@ -490,22 +493,22 @@ void StatisticsCarInfo() {
         } else if (!strcmp(input, "0")) {//返回
             break;
         } else {//无效输入
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
         }
     }
 }
 
-void AddCarInfo() {
+void AddCarInfo(void) {
     //显示添加选项列表
     ClearScreen();
-    printf(UI_ADD_CAR_OPTION);
+    printf("%s", UI_ADD_CAR_OPTION);
     while (true) {
         //等待用户输入
         char input[5];
         UserInput(input);
         if (!strcmp(input, "1")) {//添加单条信息
             printf("请根据以下提示输入二手车信息：");
-            printf(UI_INFO_INPUT_TIP);//内容提示
+            printf("%s", UI_INFO_INPUT_TIP);//内容提示
             printf("\n\r");
 
             CarInfo carInfo;
@@ -513,7 +516,7 @@ void AddCarInfo() {
             scanf(DATA_INPUT_FORMAT,
                   &carInfo.Id, carInfo.Brand, carInfo.Model,
                   &carInfo.OriPrice, &carInfo.PurchasePrice, &carInfo.ActualPrice,
-                  &carInfo.Mileage, &carInfo.Age, &carInfo.HaveRepair, &carInfo.IsFault, &carInfo.Status,
+                  &carInfo.Mileage, &carInfo.Age, &carInfo.HaveRepair, &carInfo.IsFault, carInfo.Status,
                   &carInfo.Date.Year, &carInfo.Date.Mouth, &carInfo.Date.Day,
                   carInfo.Seller.Name, &carInfo.Seller.EstimatedPrice,
                   carInfo.SalesPerson.Name, &carInfo.SalesPerson.Id,
@@ -535,12 +538,12 @@ void AddCarInfo() {
         } else if (!strcmp(input, "0")) {//返回
             return;
         } else {//无效输入
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
         }
     }
 }
 
-void SaveCarInfo() {
+void SaveCarInfo(void) {
     ClearScreen();
     if (SaveCarToFile(DATA_PATH, Head)) {//保存数据并获取结果
         Pause("保存失败！请检查 .\\data\\data.txt");
@@ -549,10 +552,10 @@ void SaveCarInfo() {
     }
 }
 
-void Settings() {
+void Settings(void) {
     //显示更多设置菜单
     ClearScreen();
-    printf(UI_MORE_SET_MENU);
+    printf("%s", UI_MORE_SET_MENU);
     while (true) {
         char input[5];
         UserInput(input);
@@ -566,7 +569,7 @@ void Settings() {
         } else if (!strcmp(input, "0")) {//返回
             return;
         } else {//无效输入
-            printf(UI_INPUT_ERROR);
+            printf("%s", UI_INPUT_ERROR);
         }
     }
 }
@@ -582,16 +585,16 @@ void SelectCar(int id) {
     while (true) {
         //显示详细信息菜单
         ClearScreen();
-        printf(UI_INFO_HEADER);
+        printf("%s", UI_INFO_HEADER);
         printf("\n\r");
         PrintCarInfo(node);
         printf("\n\r");
-        printf(UI_SELECT_MENU);
+        printf("%s", UI_SELECT_MENU);
         //等待用户输入
         char input[5];
         UserInput(input);
         if (!strcmp(input, "1")) {                                          //修改信息
-            printf(UI_CHANGE_OPTION);
+            printf("%s", UI_CHANGE_OPTION);
             while (true) {
                 UserInput(input);
                 if (!strcmp(input, "1")) {                          //修改品牌
@@ -615,7 +618,7 @@ void SelectCar(int id) {
                 } else if (!strcmp(input, "0")) {                   //返回
                     break;
                 } else {                                            //无效输入
-                    printf(UI_INPUT_ERROR);
+                    printf("%s", UI_INPUT_ERROR);
                     continue;
                 }
                 Pause("二手车信息修改成功！");
@@ -623,7 +626,7 @@ void SelectCar(int id) {
             }
         } else if (!strcmp(input, "2")) {                                   //删除信息
             //二次核对
-            printf(DELETE_VERIFY);
+            printf("%s", DELETE_VERIFY);
             UserInput(input);
             if (!strcmp(input, "y")) {
                 Head = DeleteNode(Head, node);
@@ -634,7 +637,7 @@ void SelectCar(int id) {
         } else if (!strcmp(input, "0")) {                                   //返回
             return;
         } else {
-            printf(UI_INPUT_ERROR);                                 //无效输入
+            printf("%s", UI_INPUT_ERROR);                                 //无效输入
         }
     }
 

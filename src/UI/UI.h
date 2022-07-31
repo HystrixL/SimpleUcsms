@@ -13,12 +13,12 @@
 /*!
  * @brief 用户模式菜单
 */
-void UserMenu();
+void UserMenu(void);
 
 /*!
  * @brief 管理员模式菜单
 */
-void AdminMenu();
+void AdminMenu(void);
 
 /*!
  * @brief 主菜单菜单
@@ -30,27 +30,27 @@ void WelcomeMenu(CarInfoNode *head);
 /*!
  * @brief 查询菜单
 */
-void SearchCarInfo();
+void SearchCarInfo(void);
 
 /*!
  * @brief 排序菜单
 */
-void SortCarInfo();
+void SortCarInfo(void);
 
 /*!
  * @brief 增加菜单
 */
-void AddCarInfo();
+void AddCarInfo(void);
 
 /*!
  * @brief 统计菜单
 */
-void StatisticsCarInfo();
+void StatisticsCarInfo(void);
 
 /*!
  * @brief 保存菜单
 */
-void SaveCarInfo();
+void SaveCarInfo(void);
 
 /*!
  * @brief 选择菜单
@@ -62,6 +62,6 @@ void SelectCar(int id);
 /*!
  * @brief 更多设置菜单
 */
-void Settings();
+void Settings(void);
 
 #endif //CFINALWORK_UI_H
