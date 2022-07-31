@@ -89,4 +89,4 @@ const char *DELETE_VERIFY =
         "请再次核对，确定删除选中信息？请输入y确定。";
 
 const char *DIVIDER_BAR_CHAR =
-        "==";
+        "=";

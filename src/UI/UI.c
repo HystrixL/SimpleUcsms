@@ -344,18 +344,14 @@ void SearchCarInfo(void) {
             } else if (input[0] == '~') {                   //跳转页面
                 char pageTo[10];
                 strcpy(pageTo, &input[1]);
-//                if (atoi(pageTo) - 1 > maxPage || atoi(pageTo) - 1 < 0) {
-//                    Pause("当前页码不存在！");
-//                    continue;
-//                }
-                currentPage = atoi(pageTo) - 1;
+                currentPage = strtol(pageTo, NULL, 10) - 1;
             } else if (strlen(input) == 4) {             //选择指定编号二手车
                 if (!GetIsAdmin()) {                           //非管理员错误
                     printf("%s", UI_INPUT_ERROR);
                     getch();
                     continue;
                 }
-                int id = atoi(input);
+                int id = strtol(input, NULL, 10);
                 SelectCar(id);
             } else {                                           //无效输入
                 printf("%s", UI_INPUT_ERROR);
