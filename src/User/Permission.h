@@ -42,7 +42,7 @@ void ReadPassword();
  *
  * @return 写入结果（非0为失败）
 */
-int WritePassword();
+OperationResult WritePassword();
 
 /*!
  * @brief 修改密码UI
@@ -50,6 +50,6 @@ int WritePassword();
  *
  * @return 修改结果（非0为失败）
 */
-int ChangePassword();
+OperationResult ChangePassword();
 
 #endif //CFINALWORK_PERMISSION_H

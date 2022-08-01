@@ -23,14 +23,12 @@ void ReadPassword() {
     ReadStrFromFile(PASSWORD_PATH, password);
 }
 
-int WritePassword() {
+OperationResult WritePassword() {
     return SaveStrFromFile(PASSWORD_PATH, password);
 }
 
-int ChangePassword() {
-    char outputTemp[40];
-    sprintf(outputTemp, "请输入长度 %d 以内的新密码：", MAX_PASSWORD_LENGTH);
-    printf("%s", outputTemp);
+OperationResult ChangePassword() {
+    printf("请输入长度 %d 以内的新密码：", MAX_PASSWORD_LENGTH);
     scanf("%s", password);
     return WritePassword();
 }

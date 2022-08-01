@@ -8,9 +8,7 @@
 void AppendNode(CarInfoNode *head, CarInfo carInfo) {
     if (head == NULL) return;
 
-    CarInfoNode *ptr = (CarInfoNode *) malloc(sizeof(carInfo));
-    ptr->next = NULL;
-    ptr->prior = NULL;
+    CarInfoNode *ptr = (CarInfoNode *) calloc(1, sizeof(carInfo));
     ptr->data = carInfo;
     ptr->isVisible = true;
 
@@ -36,39 +34,21 @@ void LinkList(CarInfoNode *head1, CarInfoNode *head2) {
 }
 
 CarInfoNode *DeleteNode(CarInfoNode *head, CarInfoNode *node) {
-    if (node == NULL || head == NULL) return NULL;
+    if (node == NULL || head == NULL) return head;
 
-    //头节点
-    if (node == head) {
-        CarInfoNode *ptr;
-        CarInfoNode *pn;
-        ptr = head;
-        pn = ptr->next;
-        pn->prior = NULL;
-        free(ptr);
-        return pn;
+    CarInfoNode *ptr = head;
+    while (ptr != node && ptr != NULL) {
+        ptr = ptr->next;
     }
 
-    CarInfoNode *pp;
-    CarInfoNode *ptr;
-    CarInfoNode *pn;
-    pp = head;
+    if (ptr == NULL) return head;//查无目标
 
-    while (pp->next != node && pp->next != NULL) {
-        pp = pp->next;
-    }
-
-    if (pp->next == NULL) return head;
-
-    ptr = pp->next;
-    pn = ptr->next;
-
-    if (pn != NULL) {//非尾节点
-        pp->next = pn;
-        pn->prior = pp;
-    } else {//尾节点
-        pp->next = NULL;
-    }
+    if (ptr->prior != NULL) //非头节点
+        ptr->prior->next = ptr->next;
+    else
+        head = ptr->next;
+    if (ptr->next != NULL) //非尾节点
+        ptr->next->prior = ptr->prior;
 
     free(ptr);
     return head;

@@ -8,28 +8,25 @@
 #include "../Core/includes.h"
 
 //二手车卖家结构体
-struct CarSeller {
+typedef struct {
     char Name[20];                      //卖家姓名
     float EstimatedPrice;               //卖家预期售价
-};
-typedef struct CarSeller CarSeller;
+} CarSeller;
 
 //二手车销售员结构体
-struct CarSalesPerson {
+typedef struct {
     char Name[20];                     //销售员姓名
     int Id;                            //销售员ID
-};
-typedef struct CarSalesPerson CarSalesPerson;
+} CarSalesPerson;
 
 //二手车客户结构体
-struct CarCustomer {
+typedef struct {
     char Name[20];                      //客户姓名
     char PhoneNumber[12];               //客户电话
-};
-typedef struct CarCustomer CarCustomer;
+} CarCustomer;
 
 //二手车数据结构体
-struct CarInfo {
+typedef struct CarInfo {
     int Id;                             //编号
     char Brand[30];                     //品牌
     char Model[30];                     //型号
@@ -46,7 +43,6 @@ struct CarInfo {
     CarSalesPerson SalesPerson;         //销售员
     CarCustomer Customer;               //客户
     char Handler[20];                   //经手人
-};
-typedef struct CarInfo CarInfo;
+} CarInfo;
 
 #endif //CFINALWORK_CARINFO_H

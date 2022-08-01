@@ -53,6 +53,6 @@ int SaveCarToFile(const char *path, const CarInfoNode *head);
  * @param head 字符串地址
  * @return 保存结果（非0为失败）
 */
-int SaveStrFromFile(const char *path, const char *content);
+OperationResult SaveStrFromFile(const char *path, const char *content);
 
 #endif //CFINALWORK_FILE_H

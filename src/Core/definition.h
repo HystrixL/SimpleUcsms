@@ -6,12 +6,16 @@
 #define CFINALWORK_DEFINITION_H
 
 //日期结构体
-struct Date {
+typedef struct {
     int Year;
     int Mouth;
     int Day;
-};
-typedef struct Date Date;
+} Date;
+
+typedef enum {
+    Success = 0,
+    Failure = 1
+} OperationResult;
 
 //数据输入格式符
 #define DATA_INPUT_FORMAT "%d %s %s %f %f %f %d %d %c %c %s %d/%02d/%02d %s %f %s %d %s %s %s"

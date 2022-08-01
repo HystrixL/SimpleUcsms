@@ -20,15 +20,11 @@ CarInfoNode *ReadCarFromFile(const char *path) {
 
         //创建头节点
         if (head == NULL) {
-            head = (CarInfoNode *) malloc(sizeof(CarInfoNode));
-            head->next = NULL;
-            head->prior = NULL;
+            head = (CarInfoNode *) calloc(1, sizeof(CarInfoNode));
             pp = head;
             ptr = head;
         } else {//创建非头节点
-            ptr = (CarInfoNode *) malloc(sizeof(CarInfoNode));
-            ptr->next = NULL;
-            ptr->prior = NULL;
+            ptr = (CarInfoNode *) calloc(1, sizeof(CarInfoNode));
         }
         //读入数据
         int t = fscanf(file, DATA_INPUT_FORMAT,
@@ -114,17 +110,17 @@ void ReadStrFromFile(const char *path, const char *content) {
     fclose(file);
 }
 
-int SaveStrFromFile(const char *path, const char *content) {
+OperationResult SaveStrFromFile(const char *path, const char *content) {
     //打开文件，准备写入
     FILE *file;
     file = fopen(path, "w");
 
     if (file == NULL) {
-        return 1;
+        return Failure;
     };
     //写入字符串
     fprintf(file, "%s", content);
 
     fclose(file);
-    return 0;
+    return Success;
 }

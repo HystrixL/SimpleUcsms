@@ -556,10 +556,10 @@ void Settings(void) {
         char input[5];
         UserInput(input);
         if (!strcmp(input, "1")) {//修改密码
-            if (ChangePassword()) {//修改密码并获取结果
-                Pause("密码修改失败！");
-            } else {
+            if (ChangePassword() == Success) {//修改密码并获取结果
                 Pause("密码修改成功！");
+            } else {
+                Pause("密码修改失败！");
             }
             return;
         } else if (!strcmp(input, "0")) {//返回

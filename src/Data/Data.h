@@ -9,13 +9,12 @@
 #include "CarInfo.h"
 
 //二手车链表节点结构体
-struct CarInfoNode {
-    struct CarInfoNode *prior;                  //前节点
+typedef struct _CarInfoNode {
+    struct _CarInfoNode *prior;                  //前节点
     CarInfo data;                               //数据
     bool isVisible;                             //是否可见
-    struct CarInfoNode *next;                   //后节点
-};
-typedef struct CarInfoNode CarInfoNode;
+    struct _CarInfoNode *next;                   //后节点
+} CarInfoNode;
 
 /*!
  * @brief 选中指定ID节点

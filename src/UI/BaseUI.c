@@ -47,7 +47,7 @@ void EncryptInput(char *input) {
 
 void PrintPage(CarInfoNode *head, int page) {
     //跳转至指定页
-    struct CarInfoNode *node = head;
+    CarInfoNode *node = head;
     for (int i = 0; i < page * 10;) {
         if (node == NULL) return;
         node = node->next;
